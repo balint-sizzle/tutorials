@@ -14,10 +14,10 @@ for i in range(300):  # Integrate over 3 second of robot life
     o_Jtool3 = pin.computeFrameJacobian(robot.model,robot.data,q,IDX_TOOL,pin.LOCAL_WORLD_ALIGNED)[:3,:]
 
     # vector from tool to goal, in world frame
-    o_TG = oMtool.translation-oMgoal.translation
+    o_TG = oMgoal.translation - oMtool.translation
     
     # Control law by least square
-    vq = -pinv(o_Jtool3)@o_TG
+    vq = pinv(o_Jtool3)@o_TG
 
     q = pin.integrate(robot.model,q, vq * DT)
     viz.display(q)
