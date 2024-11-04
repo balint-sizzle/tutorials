@@ -9,8 +9,8 @@ def NEW_CONF(q_near,q_rand,discretisationsteps, delta_q = None):
     if delta_q is not None and dist > delta_q:
         #compute the configuration that corresponds to a path of length delta_q
         q_end = lerp(q_near,q_rand,delta_q/dist)
-        dist = delta_q
-    dt = dist / discretisationsteps
+        # now dist == delta_q
+    dt = 1 / discretisationsteps
     for i in range(1,discretisationsteps):
         q = lerp(q_near,q_end,dt*i)
         if coll(q):
